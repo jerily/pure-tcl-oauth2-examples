@@ -1,0 +1,8 @@
+package require tcltest
+namespace import ::tcltest::test
+source [file join [file dirname [file dirname [info script]]] library examples.tcl]
+test example-paths {installed examples are discoverable without starting servers} -body {
+    lmap name {local-server.tcl local-client.tcl google-login.tcl web-user-google.tcl google-config.json} {
+        file isfile [::oauth2::examples::path $name]
+    }
+} -result {1 1 1 1 1}
